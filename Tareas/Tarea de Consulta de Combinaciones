@@ -1,10 +1,10 @@
 SELECT Country,Product,SalePrice,ManufacturingPrice FROM modelorelacional.financialsample
 WHERE Country='Mexico' and Product='Carretera' and ManufacturingPrice='3' and SalePrice='15'
 
-union
+UNION
 
-SELECT Country,Product,SalePrice,ManufacturingPrice FROM modelorelacional.financialsample
-WHERE Country='Mexico' and Product='Montana' and ManufacturingPrice='3' and SalePrice='15';
+(SELECT Country,Product,SalePrice,ManufacturingPrice FROM modelorelacional.financialsample
+WHERE Country='Mexico' and Product='Montana' and ManufacturingPrice='3' and SalePrice='15');
 
 CREATE TABLE currencies (
 currency_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -35,4 +35,5 @@ WHERE t1.Country='Mexico' and t1.Year= 2014 and t1.MonthNumber in(1,2);
 SELECT * FROM modelorelacional.currencies;
 
 UPDATE modelorelacional.currencies set exchange_rate = 20.48 WHERE currency_id = 5;
+
 
