@@ -8,16 +8,16 @@ create procedure sp_upd_currency(
 )
 Begin
 
- if p_tasa >0 and p_tasa is not null THEN
+ if p_currency_id and p_tasa>0 is not null THEN
  
    Update modelorelacional.currencies set exchange_rate = p_tasa where currency_id >0;
    commit;
    else
-   select "No se puede actualizar";
+   select "Que no se hizo ningun cambio";
   end if;
 end;
  select * from modelorelacional.currencies where Currency_Id=9;
  
 select* from modelorelacional.currencies b; 
 
-CALL modelorelacional.sp_upd_currency(0, 9)
+CALL modelorelacional.sp_upd_currency(0,9)
