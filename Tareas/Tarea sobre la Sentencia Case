@@ -1,7 +1,7 @@
 DELIMITER //
-DROP PROCEDURE sp_upd_case; 
+DROP PROCEDURE sp_new_procedure_case; 
 DELIMITER //
-create procedure sp_upd_case(
+create procedure sp_new_procedure_case(
 in p_currency_name varchar(45),
 in p_currency_symbol varchar(45),
 in p_exchange_rate decimal(15,2),
@@ -44,10 +44,8 @@ set v_currency_symbol = "€";
     commit;
     end;
     
-    call modelorelacional.sp_upd_case(
+    call modelorelacional.sp_new_procedure_case(
      "sol peruano", "s.", 0, "Peru", "Pen"
     );
     select*from modelorelacional.currencies where currency_name like '%euro%'
 
-
- 
