@@ -49,3 +49,4 @@ set v_currency_symbol = "€";
     );
     select*from modelorelacional.currencies where currency_name like '%euro%'
 
+
