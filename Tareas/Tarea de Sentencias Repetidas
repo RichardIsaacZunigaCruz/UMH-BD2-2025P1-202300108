@@ -29,6 +29,7 @@ declare v_monto decimal(10,2) default 0;
 
  set v_meses =p_meses;
  set v_monto = p_monto;
+ set v_tasa_interes =p_tasa_interes;
  
  While v_control < v_meses Do
  set v_saldo = v_saldo + v_monto;
@@ -46,4 +47,8 @@ end;
 Call modelorelacional.sp_Simulador_Ahorro( 350, 12, 0);
 
 Select*from modelorelacional.transacciones;
+
+
+
+
 
