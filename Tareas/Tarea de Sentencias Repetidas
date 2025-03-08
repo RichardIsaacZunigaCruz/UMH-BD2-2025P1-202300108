@@ -1,4 +1,4 @@
-/* Richard Isaac Zuniga Cruz 202300108*/
+#Richard Isaac Zuniga Cruz 202300108
 
 Drop table modelorelacional.transacciones;
 
@@ -18,12 +18,13 @@ delimiter //
 Create procedure modelorelacional.sp_Simulador_Ahorro(
 in p_monto decimal (10,2),
 in p_meses int,
-in p_tasa_interes decimal(10,2)
+in p_tasa_interes decimal (10,2)
 )
 begin
 declare v_monto decimal(10,2) default 0;
  declare v_control int default 0;
  declare v_meses int default 0;
+ declare v_tasa_interes decimal(10,2) default 0;
  declare v_saldo decimal (10,2) default 0;
 
  set v_meses =p_meses;
@@ -45,3 +46,4 @@ end;
 Call modelorelacional.sp_Simulador_Ahorro( 350, 12, 0);
 
 Select*from modelorelacional.transacciones;
+
