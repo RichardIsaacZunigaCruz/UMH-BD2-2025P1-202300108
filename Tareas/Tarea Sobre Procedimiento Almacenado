@@ -90,8 +90,7 @@ begin
  set v_Debito= v_Saldo+ v_Credito;
  set v_Total_Debitos = v_Saldo+ v_Debito;
  
- Insert into modelorelacional.cuentaytransaccion ( Credito,Total_Creditos,Debito, Total_Debitos)
- 
+Insert into modelorelacional.cuentaytransaccion (Credito,TotalCreditos,Debito, TotalDebitos,Saldo)
  Values (v_Credito,v_Total_Creditos,v_Debito,v_Total_Debitos,v_Saldo);
  
  set v_control = v_control +1;
@@ -104,4 +103,3 @@ CALL modelorelacional.sp_cuenta_transaccion(800,12,1,05,0,0);
 
 select*from modelorelacional.cuentaytransaccion;
 
-select*from modelorelacional.cuentaytransaccion;
