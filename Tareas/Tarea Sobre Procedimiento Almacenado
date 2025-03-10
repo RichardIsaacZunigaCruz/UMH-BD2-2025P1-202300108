@@ -20,10 +20,11 @@ values('20010001','2024/12/12','800,00','0,00','800,00','0,00','800,00'),
 ('20010004','2025/01/14','15.000,00','0,00','15.000,00','0,00','15.000,00'),
 ('20010005','2024/11/23','256,00','0,00','256,00','0,00','256,00')
 ; 
+
+#Ejecute este codigo para ver el contenido de la tabla
 select* from modelorelacional.cuentaytransaccion;
 
 # Sentencia de eliminación y creación del procedimiento almacenado 
-
 delete from modelorelacional.cuentaytransaccion where NumTransaccion =5;
 
 drop  procedure if exists modelorelacional.sp_cuenta_transaccion;
@@ -98,5 +99,9 @@ begin
  end while;
 end;
 CALL modelorelacional.sp_cuenta_transaccion(800,12,1,05,0,0); 
+
+#Ejecute para ver el procedimiento almacenado
+
+select*from modelorelacional.cuentaytransaccion;
 
 select*from modelorelacional.cuentaytransaccion;
