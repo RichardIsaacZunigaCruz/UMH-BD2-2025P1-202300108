@@ -1,0 +1,102 @@
+#Richard Isaac Zuniga Cruz 202300108
+#Insercion de Datos de la tabla de cuentas y transacciones
+drop table modelorelacional.cuentaytransaccion;
+
+Create table cuentaytransaccion(
+ NumTransaccion int auto_increment primary key,
+ Cuenta int,
+ Fecha date,
+ Credito decimal (10,2),
+ TotalCreditos decimal (10,2),
+ Debito decimal (10,2),
+TotalDebitos decimal (10,2),
+Saldo decimal (10,2)
+);
+
+insert into cuentaytransaccion(Cuenta,Fecha,Credito,Debito,TotalCreditos, TotalDebitos, Saldo) 
+values('20010001','2024/12/12','800,00','0,00','800,00','0,00','800,00'),
+('20010002','2025/01/05','560,00','0,00','560,00','0,00','560,00'),
+('20010003','2024/10/30','1.254,00','0,00','1.254,00','0,00','1.254,00'),
+('20010004','2025/01/14','15.000,00','0,00','15.000,00','0,00','15.000,00'),
+('20010005','2024/11/23','256,00','0,00','256,00','0,00','256,00')
+; 
+select* from modelorelacional.cuentaytransaccion;
+
+# Sentencia de eliminación y creación del procedimiento almacenado 
+
+delete from modelorelacional.cuentaytransaccion where NumTransaccion =5;
+
+drop  procedure if exists modelorelacional.sp_cuenta_transaccion;
+
+Delimiter //
+Create procedure sp_cuenta_transaccion(
+   in p_Cuenta decimal(10,2),
+   in p_Fecha date,
+   in p_Credito decimal (10,2),
+   in p_Total_Creditos decimal (10,2),
+   in p_Debito decimal (10,2),
+   in  p_Total_Debitos decimal (10,2),
+   in p_Saldo decimal (10,2)
+)
+begin
+ set @Cuenta = "20010005";
+ set @Fecha = "2024/11/23";
+ set @Credito = "256,00";
+set @Debito = "0,00";
+set @Total_Creditos = "256,00";
+ set @Total_Debitos = "0,00";
+ set @Saldo = "256,00";
+ 
+   Insert into cuentaytransacciones(Cuenta,Fecha, Credito, Debito, Total_Creditos, Total_Debitos, Saldo)
+  values (@Cuenta, @Fecha, @Credito, @Debito, @Total_Creditos, @Total_Debitos, @Saldo);
+  commit;
+end;
+
+update modelorelacional.cuentaytransaccion set Cuenta= 20010005 where NumTransaccion=5;
+call modelorelacional.sp_cuenta_transaccion(2001,2024,5,256,0,0);
+
+# Ejecutar Procedimiento Almacenado
+
+drop procedure if exists modelorelacional.sp_cuenta_transaccion;
+
+delimiter //
+Create procedure modelorelacional.sp_cuenta_transaccion(
+   in p_Credito decimal (10,2),
+   in p_Total_Creditos decimal (10,2),
+   in p_Debito decimal (10,2),
+   in  p_Total_Debitos decimal (10,2),
+   in p_Saldo decimal (10,2),
+   in p_Tasa_Interes decimal(10,2)
+)
+begin
+ Declare v_Cuenta int default 0;
+ Declare v_control int default 0;
+ Declare v_Fecha date default 0;
+ Declare v_Credito int default 0;
+ Declare v_Total_Creditos decimal (10,2) ;
+ Declare v_Debito decimal (10,2) default 0;
+ Declare v_Total_Debitos decimal (10,2) default 0;
+ Declare v_Saldo decimal (10,2) default 0;
+ 
+ set v_Credito = p_Credito;
+ set v_Debito = p_Debito;
+ set v_Total_Creditos = p_Total_Creditos;
+ set v_Total_Debitos =p_Total_Debitos;
+ set v_Saldo = p_Saldo;
+ 
+ while v_control < v_Fecha Do
+ 
+ set v_Debito= v_Saldo+ v_Credito;
+ set v_Total_Debitos = v_Saldo+ v_Debito;
+ 
+ Insert into modelorelacional.cuentaytransaccion ( Credito,Total_Creditos,Debito, Total_Debitos)
+ 
+ Values (v_Credito,v_Total_Creditos,v_Debito,v_Total_Debitos,v_Saldo);
+ 
+ set v_control = v_control +1;
+ 
+ end while;
+end;
+CALL modelorelacional.sp_cuenta_transaccion(800,12,1,05,0,0); 
+
+select*from modelorelacional.cuentaytransaccion;
