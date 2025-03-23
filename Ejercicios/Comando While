@@ -1,0 +1,17 @@
+delimiter //
+
+create procedure sp_Ciclos(in p_max int)
+begin
+ 
+  declare vContandor1 int default 0;
+  
+  declare vSecuencia varchar (120) default "";
+  
+ while vContandor1 <p_max do
+ set vSecuencia = concat(vSecuencia, "", vContandor1);
+ set vContandor1 = vContandor1+1;
+ end while;
+ select vSecuencia;
+ end;
+ 
+ call sp_Ciclos(20);
