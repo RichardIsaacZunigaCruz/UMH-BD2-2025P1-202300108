@@ -1,0 +1,21 @@
+Create table modelorelacional.reporte_de_ventas as
+SELECT year,MonthNumber,segment,sum(sales) total from modelorelacional.financialsample
+where year = 2014
+group by year, MonthNumber, segment
+;
+
+truncate table  modelorelacional.reporte;
+
+select*from modelorelacional.reporte;
+
+insert into modelorelacional.reporte_de_ventas
+SELECT year,MonthNumber,segment,sum(sales) total from modelorelacional.financialsample
+where year = 2014
+group by year, MonthNumber, segment
+;
+
+select segment, country from modelorelacional.financialsample
+where product = ' Carretera '
+and Country in (
+select country from currencies where exchange_rate>1
+)
